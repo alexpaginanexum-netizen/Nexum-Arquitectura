@@ -68,7 +68,7 @@ export function Process() {
                 <span className="absolute left-0 top-1 h-3.5 w-3.5 rounded-full border-2 border-nexum-gold bg-nexum-ivory sm:h-[1.375rem] sm:w-[1.375rem]" />
                 <Reveal>
                   <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
-                    <span className="font-body text-xs tracking-nexum text-nexum-bronze">
+                    <span className="font-body text-xs tracking-nexum text-nexum-bronze-deep">
                       {step.index}
                     </span>
                     <h3 className="font-display text-2xl text-nexum-black">{step.title}</h3>

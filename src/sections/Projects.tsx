@@ -46,8 +46,8 @@ export function Projects() {
                 className={cn(
                   "font-body text-xs tracking-nexum uppercase transition-colors",
                   filter === category
-                    ? "text-nexum-black"
-                    : "text-nexum-concrete hover:text-nexum-bronze",
+                    ? "text-nexum-black underline decoration-nexum-gold decoration-2 underline-offset-4"
+                    : "text-nexum-graphite hover:text-nexum-bronze-deep",
                 )}
                 aria-pressed={filter === category}
               >
@@ -64,26 +64,26 @@ export function Projects() {
                 <PlaceholderFrame label={`${project.name} — imagen pendiente`} />
                 <div className="mt-5 flex items-baseline justify-between gap-4 border-b border-nexum-black/10 pb-4">
                   <h3 className="font-display text-xl text-nexum-black">{project.name}</h3>
-                  <span className="shrink-0 font-body text-xs tracking-nexum uppercase text-nexum-gold">
+                  <span className="shrink-0 font-body text-xs tracking-nexum uppercase text-nexum-bronze-deep">
                     {project.category}
                   </span>
                 </div>
-                <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 font-body text-xs text-nexum-graphite sm:grid-cols-4">
+                <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-1.5 font-body text-xs sm:grid-cols-4">
                   <div>
-                    <dt className="text-nexum-concrete">Ubicación</dt>
-                    <dd>{project.location}</dd>
+                    <dt className="tracking-nexum uppercase text-nexum-graphite/80">Ubicación</dt>
+                    <dd className="text-nexum-black">{project.location}</dd>
                   </div>
                   <div>
-                    <dt className="text-nexum-concrete">Año</dt>
-                    <dd>{project.year}</dd>
+                    <dt className="tracking-nexum uppercase text-nexum-graphite/80">Año</dt>
+                    <dd className="text-nexum-black">{project.year}</dd>
                   </div>
                   <div>
-                    <dt className="text-nexum-concrete">Tipología</dt>
-                    <dd>{project.typology}</dd>
+                    <dt className="tracking-nexum uppercase text-nexum-graphite/80">Tipología</dt>
+                    <dd className="text-nexum-black">{project.typology}</dd>
                   </div>
                   <div>
-                    <dt className="text-nexum-concrete">Estado</dt>
-                    <dd>{project.status}</dd>
+                    <dt className="tracking-nexum uppercase text-nexum-graphite/80">Estado</dt>
+                    <dd className="text-nexum-black">{project.status}</dd>
                   </div>
                 </dl>
               </article>

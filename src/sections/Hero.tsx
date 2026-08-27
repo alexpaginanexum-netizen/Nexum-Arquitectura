@@ -67,7 +67,7 @@ export function Hero() {
         <div className="max-w-3xl">
           <p
             data-hero-eyebrow
-            className="mb-8 font-body text-xs tracking-nexum uppercase text-nexum-bronze"
+            className="mb-8 font-body text-xs tracking-nexum uppercase text-nexum-bronze-deep"
           >
             {hero.eyebrow}
           </p>

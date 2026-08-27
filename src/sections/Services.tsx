@@ -63,7 +63,7 @@ export function Services() {
             <p className="mt-4 max-w-sm font-body text-sm leading-relaxed text-nexum-graphite">
               {services[active].description}
             </p>
-            <p className="mt-6 font-body text-sm italic text-nexum-bronze">
+            <p className="mt-6 font-body text-sm italic text-nexum-bronze-deep">
               “{services[active].line}”
             </p>
           </div>
@@ -76,21 +76,26 @@ export function Services() {
               data-service-row
               onMouseEnter={() => setActive(i)}
               className={cn(
-                "group border-b border-nexum-black/10 py-8 transition-opacity duration-300 lg:py-14",
-                active === i ? "lg:opacity-100" : "lg:opacity-40",
+                "group border-b border-nexum-black/10 py-8 transition-colors duration-300 lg:border-l-2 lg:py-14 lg:pl-6",
+                active === i ? "lg:border-nexum-gold" : "lg:border-transparent",
               )}
             >
               <Reveal>
                 <div className="flex items-baseline gap-5">
-                  <span className="font-body text-sm text-nexum-gold">{service.index}</span>
-                  <h3 className="font-display text-2xl text-nexum-black transition-colors group-hover:text-nexum-bronze sm:text-3xl">
+                  <span className="font-body text-sm text-nexum-bronze-deep">{service.index}</span>
+                  <h3
+                    className={cn(
+                      "font-display text-2xl transition-colors group-hover:text-nexum-bronze-deep sm:text-3xl",
+                      active === i ? "text-nexum-black" : "text-nexum-black lg:text-nexum-graphite",
+                    )}
+                  >
                     {service.title}
                   </h3>
                 </div>
                 <p className="mt-3 pl-10 font-body text-sm leading-relaxed text-nexum-graphite lg:hidden">
                   {service.description}
                 </p>
-                <p className="mt-2 pl-10 font-body text-sm italic text-nexum-bronze lg:hidden">
+                <p className="mt-2 pl-10 font-body text-sm italic text-nexum-bronze-deep lg:hidden">
                   “{service.line}”
                 </p>
               </Reveal>

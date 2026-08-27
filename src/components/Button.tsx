@@ -17,8 +17,8 @@ export function Button({ href, children, variant = "primary", className }: Butto
     primary:
       "bg-nexum-black text-nexum-white px-8 py-4 hover:bg-nexum-graphite",
     secondary:
-      "border border-nexum-black/30 text-nexum-black px-8 py-4 hover:border-nexum-gold hover:text-nexum-bronze",
-    ghost: "text-nexum-black px-0 py-2 hover:text-nexum-bronze",
+      "border border-nexum-black/30 text-nexum-black px-8 py-4 hover:border-nexum-gold hover:text-nexum-bronze-deep",
+    ghost: "text-nexum-black px-0 py-2 hover:text-nexum-bronze-deep",
     light: "bg-nexum-white text-nexum-black px-8 py-4 hover:bg-nexum-ivory",
   };
 

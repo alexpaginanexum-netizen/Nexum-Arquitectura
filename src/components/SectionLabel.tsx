@@ -18,7 +18,9 @@ export function SectionLabel({ index, label, className, tone = "dark" }: Section
       )}
     >
       {index && (
-        <span className={tone === "dark" ? "text-nexum-gold" : "text-nexum-gold"}>{index}</span>
+        <span className={tone === "dark" ? "text-nexum-bronze-deep" : "text-nexum-gold"}>
+          {index}
+        </span>
       )}
       <span className="h-px w-8 bg-current opacity-40" aria-hidden />
       <span>{label}</span>

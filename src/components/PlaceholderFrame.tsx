@@ -34,7 +34,7 @@ export function PlaceholderFrame({
         <line x1="100%" y1="0" x2="0" y2="100%" stroke="currentColor" strokeWidth="1" />
         <rect x="0.5" y="0.5" width="99%" height="99%" fill="none" stroke="currentColor" strokeWidth="1" />
       </svg>
-      <span className="relative z-10 m-5 font-body text-[0.65rem] tracking-nexum uppercase text-nexum-concrete">
+      <span className="relative z-10 m-5 font-body text-[0.65rem] tracking-nexum uppercase text-nexum-graphite">
         {label}
       </span>
     </div>

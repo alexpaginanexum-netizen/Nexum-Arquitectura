@@ -217,7 +217,7 @@ export function ArchitectureJourney() {
                 ref={(el) => {
                   captionRefs.current[i] = el;
                 }}
-                className="absolute font-body text-xs tracking-nexum uppercase text-nexum-bronze"
+                className="absolute font-body text-xs tracking-nexum uppercase text-nexum-bronze-deep"
               >
                 {step}
               </span>

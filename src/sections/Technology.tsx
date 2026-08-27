@@ -28,7 +28,7 @@ export function Technology() {
           {technology.items.map((item, i) => (
             <Reveal key={item} delay={(i % 2) * 0.05}>
               <li className="flex items-center gap-4 border-b border-nexum-black/10 py-6">
-                <span className="font-body text-xs text-nexum-gold">{String(i + 1).padStart(2, "0")}</span>
+                <span className="font-body text-xs text-nexum-bronze-deep">{String(i + 1).padStart(2, "0")}</span>
                 <span className="font-body text-sm text-nexum-black">{item}</span>
               </li>
             </Reveal>
