@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+/* ==========================================================================
+   NEXUM ARQUITECTURA — Design tokens
+   Cambia estos valores para actualizar la identidad visual en todo el sitio.
+   ========================================================================== */
+:root {
+  --nexum-black: #161616;
+  --nexum-graphite: #353535;
+  --nexum-white: #f7f6f2;
+  --nexum-ivory: #efede7;
+  --nexum-concrete: #a5a39d;
+  --nexum-gold: #b9944a;
+  --nexum-bronze: #9a753d;
+
+  --nexum-line: rgba(22, 22, 22, 0.12);
+  --nexum-line-dark: rgba(247, 246, 242, 0.16);
+
+  --font-display: var(--font-fraunces);
+  --font-body: var(--font-manrope);
+
+  --ease-nexum: cubic-bezier(0.16, 1, 0.3, 1);
+  --nav-height: 5.5rem;
+}
+
+@theme inline {
+  --color-nexum-black: var(--nexum-black);
+  --color-nexum-graphite: var(--nexum-graphite);
+  --color-nexum-white: var(--nexum-white);
+  --color-nexum-ivory: var(--nexum-ivory);
+  --color-nexum-concrete: var(--nexum-concrete);
+  --color-nexum-gold: var(--nexum-gold);
+  --color-nexum-bronze: var(--nexum-bronze);
+
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+}
+
+* {
+  border-color: var(--nexum-line);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--nexum-white);
+}
+
+body {
+  background: var(--nexum-white);
+  color: var(--nexum-black);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--nexum-gold);
+  color: var(--nexum-black);
+}
+
+/* Focus states — accesibilidad */
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+  outline: 2px solid var(--nexum-gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Utilidades tipográficas */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.tracking-nexum {
+  letter-spacing: 0.22em;
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Línea decorativa reutilizable */
+.hr-nexum {
+  height: 1px;
+  width: 100%;
+  background: var(--nexum-line);
+}
+
+/* Scrollbar sobria */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--nexum-white);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--nexum-concrete);
+  border-radius: 999px;
+}
+
+/* Respeta la preferencia de movimiento reducido en todo el sitio */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Comparador render / resultado construido — input nativo invisible, solo controla el valor */
+.slider-compare {
+  -webkit-appearance: none;
+  appearance: none;
+}
+.slider-compare::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  background: transparent;
+  height: 100%;
+}
+.slider-compare::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  cursor: ew-resize;
+}
+.slider-compare::-moz-range-track {
+  background: transparent;
+  height: 100%;
+}
+.slider-compare::-moz-range-thumb {
+  width: 2px;
+  height: 100%;
+  background: transparent;
+  border: none;
+  cursor: ew-resize;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
