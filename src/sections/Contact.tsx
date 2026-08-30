@@ -1,7 +1,7 @@
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
-import { contact } from "@/lib/content";
+import { contact, whatsappHref } from "@/lib/content";
 
 export function Contact() {
   return (
@@ -18,7 +18,7 @@ export function Contact() {
           </Reveal>
           <Reveal delay={0.12}>
             <div className="mt-12">
-              <Button href="#contacto-canales" variant="light">
+              <Button href={whatsappHref} variant="light">
                 {contact.cta}
               </Button>
             </div>
@@ -35,7 +35,20 @@ export function Contact() {
                 <dt className="font-body text-xs tracking-nexum uppercase text-nexum-concrete">
                   {channel.label}
                 </dt>
-                <dd className="mt-2 font-body text-sm text-nexum-white/70">{channel.value}</dd>
+                {"href" in channel && channel.href ? (
+                  <dd className="mt-2">
+                    <a
+                      href={channel.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-body text-sm text-nexum-gold underline decoration-nexum-gold/40 underline-offset-4 transition-colors hover:text-nexum-white"
+                    >
+                      {channel.value}
+                    </a>
+                  </dd>
+                ) : (
+                  <dd className="mt-2 font-body text-sm text-nexum-white/70">{channel.value}</dd>
+                )}
               </div>
             ))}
           </dl>

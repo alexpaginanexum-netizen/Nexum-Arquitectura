@@ -248,12 +248,21 @@ export const alliance = {
   body: "NEXUM Arquitectura mantiene una alianza estratégica con GARCYM, empresa con presencia en Chimalhuacán, Estado de México. Esta colaboración fortalece nuestra capacidad para conectar diseño, desarrollo y ejecución dentro de los proyectos.",
 };
 
+/** Número de WhatsApp en formato internacional, solo dígitos (sin '+' ni espacios). */
+export const whatsappNumber = "525542869939";
+
+export const whatsappMessage =
+  "Hola, me interesa iniciar un proyecto con NEXUM Arquitectura.";
+
+/** Enlace "click to chat" de WhatsApp con el mensaje predeterminado codificado. */
+export const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
 export const contact = {
   kicker: "Todo comienza con una conexión.",
   headline: "Hablemos de tu próximo proyecto.",
   cta: "Iniciar proyecto",
   channels: [
-    { label: "WhatsApp", value: "Pendiente" },
+    { label: "WhatsApp", value: "+52 55 4286 9939", href: whatsappHref },
     { label: "Correo", value: "Pendiente" },
     { label: "Teléfono", value: "Pendiente" },
     { label: "Instagram", value: "Pendiente" },

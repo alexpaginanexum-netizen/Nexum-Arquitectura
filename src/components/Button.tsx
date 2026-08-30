@@ -22,8 +22,10 @@ export function Button({ href, children, variant = "primary", className }: Butto
     light: "bg-nexum-white text-nexum-black px-8 py-4 hover:bg-nexum-ivory",
   };
 
-  return (
-    <Link href={href} className={cn(base, styles[variant], className)}>
+  const isExternal = /^https?:\/\//.test(href);
+
+  const content = (
+    <>
       <span>{children}</span>
       <span
         aria-hidden
@@ -31,6 +33,25 @@ export function Button({ href, children, variant = "primary", className }: Butto
       >
         →
       </span>
+    </>
+  );
+
+  if (isExternal) {
+    return (
+      <a
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={cn(base, styles[variant], className)}
+      >
+        {content}
+      </a>
+    );
+  }
+
+  return (
+    <Link href={href} className={cn(base, styles[variant], className)}>
+      {content}
     </Link>
   );
 }
