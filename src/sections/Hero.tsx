@@ -1,19 +1,15 @@
 "use client";
 
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Container } from "@/components/Container";
 import { Button } from "@/components/Button";
-import { gsap, registerGsap, ScrollTrigger } from "@/animations/gsap";
+import { gsap, registerGsap } from "@/animations/gsap";
 import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { hero } from "@/lib/content";
 
 const HERO_VIDEO_SRC = "/videos/nexum-hero-scroll.mp4";
 const HERO_VIDEO_POSTER = "/images/nexum-hero-poster.jpg";
-
-/** Distancia de scroll (relativa a la altura del viewport) durante la que el Hero
- *  permanece "pinned" mientras el video avanza cuadro a cuadro. */
-const SCRUB_SCROLL_DISTANCE = "+=200%";
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -55,70 +51,33 @@ export function Hero() {
           { opacity: 1, y: 0, duration: 0.7, stagger: 0.08 },
           "-=0.5",
         );
-
-      const video = videoRef.current;
-      if (!video) return;
-
-      const mm = gsap.matchMedia();
-
-      mm.add(
-        { isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" },
-        (context) => {
-          const { isDesktop } = context.conditions as { isDesktop: boolean };
-
-          // Mobile: el scrubbing atado al touch-scroll se siente entrecortado en
-          // muchos navegadores móviles — degradamos a un loop silencioso simple.
-          if (!isDesktop) {
-            video.loop = true;
-            video.muted = true;
-            video.play().catch(() => {});
-            return;
-          }
-
-          let st: ScrollTrigger | undefined;
-          let rafId: number | null = null;
-          let pendingTime = 0;
-
-          const applyTime = () => {
-            video.currentTime = pendingTime;
-            rafId = null;
-          };
-
-          const setupScrub = () => {
-            if (!video.duration || !isFinite(video.duration)) return;
-
-            st = ScrollTrigger.create({
-              trigger: sectionRef.current,
-              start: "top top",
-              end: SCRUB_SCROLL_DISTANCE,
-              pin: true,
-              scrub: true,
-              anticipatePin: 1,
-              onUpdate: (self) => {
-                pendingTime = self.progress * video.duration;
-                if (rafId === null) {
-                  rafId = window.requestAnimationFrame(applyTime);
-                }
-              },
-            });
-          };
-
-          if (video.readyState >= 1) {
-            setupScrub();
-          } else {
-            video.addEventListener("loadedmetadata", setupScrub, { once: true });
-          }
-
-          return () => {
-            if (rafId !== null) window.cancelAnimationFrame(rafId);
-            video.removeEventListener("loadedmetadata", setupScrub);
-            st?.kill();
-          };
-        },
-      );
     }, sectionRef);
 
     return () => ctx.revert();
+  }, [reducedMotion]);
+
+  // Reproduce el video desde el frame 0 cada vez que el Hero entra en el
+  // viewport (carga inicial o al volver a subir hasta él). Se pausa al salir
+  // de vista para no gastar CPU/batería de fondo.
+  useEffect(() => {
+    const video = videoRef.current;
+    const section = sectionRef.current;
+    if (!video || !section || reducedMotion) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          video.currentTime = 0;
+          video.play().catch(() => {});
+        } else {
+          video.pause();
+        }
+      },
+      { threshold: 0.4 },
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
   }, [reducedMotion]);
 
   return (
@@ -135,7 +94,7 @@ export function Hero() {
           poster={HERO_VIDEO_POSTER}
           muted
           playsInline
-          preload="metadata"
+          preload="auto"
           role="img"
           aria-label="Animación arquitectónica de NEXUM"
         />

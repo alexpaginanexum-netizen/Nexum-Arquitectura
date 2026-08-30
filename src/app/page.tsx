@@ -1,5 +1,4 @@
 import { Hero } from "@/sections/Hero";
-import { ArchitectureJourney } from "@/sections/ArchitectureJourney";
 import { NexumIntro } from "@/sections/NexumIntro";
 import { Services } from "@/sections/Services";
 import { Process } from "@/sections/Process";
@@ -14,7 +13,6 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <ArchitectureJourney />
       <NexumIntro />
       <Services />
       <Process />
