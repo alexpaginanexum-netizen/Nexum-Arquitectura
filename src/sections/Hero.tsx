@@ -58,11 +58,16 @@ export function Hero() {
 
   // Reproduce el video desde el frame 0 cada vez que el Hero entra en el
   // viewport (carga inicial o al volver a subir hasta él). Se pausa al salir
-  // de vista para no gastar CPU/batería de fondo.
+  // de vista para no gastar CPU/batería de fondo. Al terminar, se queda
+  // congelado en su último frame (pause sin tocar currentTime) en vez de
+  // reiniciarse o volver al poster.
   useEffect(() => {
     const video = videoRef.current;
     const section = sectionRef.current;
     if (!video || !section || reducedMotion) return;
+
+    const handleEnded = () => video.pause();
+    video.addEventListener("ended", handleEnded);
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -77,7 +82,10 @@ export function Hero() {
     );
 
     observer.observe(section);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      video.removeEventListener("ended", handleEnded);
+    };
   }, [reducedMotion]);
 
   return (
