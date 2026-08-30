@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 interface ButtonProps {
   href: string;
   children: ReactNode;
-  variant?: "primary" | "secondary" | "ghost" | "light";
+  variant?: "primary" | "secondary" | "ghost" | "light" | "outline-light";
   className?: string;
 }
 
@@ -20,6 +20,8 @@ export function Button({ href, children, variant = "primary", className }: Butto
       "border border-nexum-black/30 text-nexum-black px-8 py-4 hover:border-nexum-gold hover:text-nexum-bronze-deep",
     ghost: "text-nexum-black px-0 py-2 hover:text-nexum-bronze-deep",
     light: "bg-nexum-white text-nexum-black px-8 py-4 hover:bg-nexum-ivory",
+    "outline-light":
+      "border border-nexum-white/40 text-nexum-white px-8 py-4 hover:border-nexum-gold hover:text-nexum-gold",
   };
 
   const isExternal = /^https?:\/\//.test(href);
