@@ -11,6 +11,14 @@ import { hero } from "@/lib/content";
 const HERO_VIDEO_SRC = "/videos/nexum-hero-scroll.mp4";
 const HERO_VIDEO_POSTER = "/images/nexum-hero-poster.jpg";
 
+/**
+ * Los últimos ~0.2s del archivo son una transición vacía (fade a una línea de
+ * luz) después de que el logo completo ya se armó. Cortamos la reproducción
+ * ahí para que el video quede congelado mostrando el logo, no ese hueco.
+ * Ajusta este valor si el punto de corte no cae exactamente sobre el logo.
+ */
+const HERO_VIDEO_END_MARGIN = 0.2;
+
 export function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -58,14 +66,26 @@ export function Hero() {
 
   // Reproduce el video desde el frame 0 cada vez que el Hero entra en el
   // viewport (carga inicial o al volver a subir hasta él). Se pausa al salir
-  // de vista para no gastar CPU/batería de fondo. Al terminar, se queda
-  // congelado en su último frame (pause sin tocar currentTime) en vez de
-  // reiniciarse o volver al poster.
+  // de vista para no gastar CPU/batería de fondo. Se corta un poco antes del
+  // final real (ver HERO_VIDEO_END_MARGIN) para quedar congelado sobre el
+  // logo armado, no sobre la transición vacía de los últimos frames.
   useEffect(() => {
     const video = videoRef.current;
     const section = sectionRef.current;
     if (!video || !section || reducedMotion) return;
 
+    const handleTimeUpdate = () => {
+      if (!Number.isFinite(video.duration)) return;
+      const cutoff = video.duration - HERO_VIDEO_END_MARGIN;
+      if (video.currentTime >= cutoff) {
+        video.currentTime = cutoff;
+        video.pause();
+      }
+    };
+    video.addEventListener("timeupdate", handleTimeUpdate);
+
+    // Red de seguridad por si el navegador llega a 'ended' antes de que
+    // dispare el timeupdate de corte (p. ej. video muy corto).
     const handleEnded = () => video.pause();
     video.addEventListener("ended", handleEnded);
 
@@ -84,6 +104,7 @@ export function Hero() {
     observer.observe(section);
     return () => {
       observer.disconnect();
+      video.removeEventListener("timeupdate", handleTimeUpdate);
       video.removeEventListener("ended", handleEnded);
     };
   }, [reducedMotion]);
