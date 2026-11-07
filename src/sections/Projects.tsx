@@ -1,11 +1,12 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { PlaceholderFrame } from "@/components/PlaceholderFrame";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/SectionLabel";
-import { projectCategories, projects, type ProjectCategory } from "@/lib/content";
+import { portfolio, projectCategories, projects, type ProjectCategory } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export function Projects() {
@@ -34,6 +35,13 @@ export function Projects() {
                 Estamos preparando la documentación fotográfica y técnica de nuestros proyectos.
                 Estos espacios están reservados para incorporarlos próximamente.
               </p>
+            </Reveal>
+            <Reveal delay={0.14}>
+              <div className="mt-8">
+                <Button href={portfolio.href} variant="secondary">
+                  {portfolio.label}
+                </Button>
+              </div>
             </Reveal>
           </div>
 

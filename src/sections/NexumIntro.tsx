@@ -107,7 +107,7 @@ export function NexumIntro() {
             <div
               key={node.label}
               data-node
-              className="absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-nexum-black/15 bg-nexum-ivory text-center shadow-[0_1px_0_0_rgba(22,22,22,0.04)]"
+              className="absolute flex h-20 w-20 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-nexum-black/15 bg-nexum-ivory text-center shadow-[0_1px_0_0_rgba(20,20,19,0.04)]"
               style={{ left: node.x, top: node.y }}
             >
               <span className="px-1 font-body text-[0.6rem] tracking-nexum text-nexum-graphite">

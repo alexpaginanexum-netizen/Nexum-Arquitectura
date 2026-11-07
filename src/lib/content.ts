@@ -248,26 +248,89 @@ export const alliance = {
   body: "NEXUM Arquitectura mantiene una alianza estratégica con GARCYM, empresa con presencia en Chimalhuacán, Estado de México. Esta colaboración fortalece nuestra capacidad para conectar diseño, desarrollo y ejecución dentro de los proyectos.",
 };
 
-/** Número de WhatsApp en formato internacional, solo dígitos (sin '+' ni espacios). */
-export const whatsappNumber = "525542869939";
+export interface TeamContact {
+  /** Nombre que se muestra, sin título. */
+  name: string;
+  /** Nombre corto para el saludo del mensaje de WhatsApp. */
+  shortName: string;
+  /** Título profesional tal como se muestra. */
+  title: "Arquitecto" | "Arquitecta";
+  /** Teléfono tal como se muestra. */
+  display: string;
+  /** Número de WhatsApp en formato internacional, solo dígitos (sin '+' ni espacios). */
+  whatsapp: string;
+}
 
-export const whatsappMessage =
-  "Hola, me interesa iniciar un proyecto con NEXUM Arquitectura.";
+/** Integrantes del equipo NEXUM con WhatsApp directo. */
+export const teamContacts: TeamContact[] = [
+  {
+    name: "Eduardo Castro",
+    shortName: "Eduardo",
+    title: "Arquitecto",
+    display: "55 1393 6807",
+    whatsapp: "525513936807",
+  },
+  {
+    name: "Estrella De Santiago",
+    shortName: "Estrella",
+    title: "Arquitecta",
+    display: "55 4286 9939",
+    whatsapp: "525542869939",
+  },
+  {
+    name: "Alejandro R. Solano",
+    shortName: "Alejandro",
+    title: "Arquitecto",
+    display: "55 3558 8226",
+    whatsapp: "525535588226",
+  },
+];
+
+/** Mensaje predeterminado de WhatsApp, personalizado con el nombre de quien recibe. */
+export function whatsappMessageFor(member: TeamContact): string {
+  return `Hola Arq. ${member.shortName}, me interesa iniciar un proyecto con NEXUM Arquitectura.`;
+}
 
 /** Enlace "click to chat" de WhatsApp con el mensaje predeterminado codificado. */
-export const whatsappHref = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+export function whatsappHrefFor(member: TeamContact): string {
+  return `https://wa.me/${member.whatsapp}?text=${encodeURIComponent(whatsappMessageFor(member))}`;
+}
+
+export const instagram = {
+  handle: "@nexum.arquitectos",
+  href: "https://www.instagram.com/nexum.arquitectos",
+};
+
+/** Portafolio arquitectónico en PDF (archivo en public/). */
+export const portfolio = {
+  label: "Ver portafolio (PDF)",
+  href: "/portafolio-nexum.pdf",
+};
+
+export interface ContactChannel {
+  label: string;
+  value?: string;
+  href?: string;
+  links?: { label: string; href: string }[];
+}
 
 export const contact = {
   kicker: "Todo comienza con una conexión.",
   headline: "Hablemos de tu próximo proyecto.",
   cta: "Iniciar proyecto",
   channels: [
-    { label: "WhatsApp", value: "+52 55 4286 9939", href: whatsappHref },
+    {
+      label: "WhatsApp",
+      links: teamContacts.map((member) => ({
+        label: `${member.title} ${member.name} · ${member.display}`,
+        href: whatsappHrefFor(member),
+      })),
+    },
     { label: "Correo", value: "Pendiente" },
     { label: "Teléfono", value: "Pendiente" },
-    { label: "Instagram", value: "Pendiente" },
+    { label: "Instagram", value: instagram.handle, href: instagram.href },
     { label: "Ubicación", value: "Pendiente" },
-  ],
+  ] as ContactChannel[],
 };
 
 export const footer = {

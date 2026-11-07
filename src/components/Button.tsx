@@ -24,7 +24,8 @@ export function Button({ href, children, variant = "primary", className }: Butto
       "border border-nexum-white/40 text-nexum-white px-8 py-4 hover:border-nexum-gold hover:text-nexum-gold",
   };
 
-  const isExternal = /^https?:\/\//.test(href);
+  // Enlaces externos y archivos PDF se abren en pestaña nueva con <a> (no con navegación de Next).
+  const isExternal = /^https?:\/\/|\.pdf$/i.test(href);
 
   const content = (
     <>

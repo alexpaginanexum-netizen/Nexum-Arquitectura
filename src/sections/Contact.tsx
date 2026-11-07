@@ -1,7 +1,8 @@
 import { Button } from "@/components/Button";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
-import { contact, whatsappHref } from "@/lib/content";
+import { WhatsAppPicker } from "@/components/WhatsAppPicker";
+import { contact, portfolio } from "@/lib/content";
 
 export function Contact() {
   return (
@@ -17,9 +18,10 @@ export function Contact() {
             </h2>
           </Reveal>
           <Reveal delay={0.12}>
-            <div className="mt-12">
-              <Button href={whatsappHref} variant="light">
-                {contact.cta}
+            <div className="mt-12 flex flex-wrap items-start gap-4">
+              <WhatsAppPicker variant="cta">{contact.cta}</WhatsAppPicker>
+              <Button href={portfolio.href} variant="outline-light">
+                {portfolio.label}
               </Button>
             </div>
           </Reveal>
@@ -35,7 +37,21 @@ export function Contact() {
                 <dt className="font-body text-xs tracking-nexum uppercase text-nexum-concrete">
                   {channel.label}
                 </dt>
-                {"href" in channel && channel.href ? (
+                {channel.links ? (
+                  <dd className="mt-2 space-y-2">
+                    {channel.links.map((link) => (
+                      <a
+                        key={link.href}
+                        href={link.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="block font-body text-sm text-nexum-gold underline decoration-nexum-gold/40 underline-offset-4 transition-colors hover:text-nexum-white"
+                      >
+                        {link.label}
+                      </a>
+                    ))}
+                  </dd>
+                ) : channel.href ? (
                   <dd className="mt-2">
                     <a
                       href={channel.href}

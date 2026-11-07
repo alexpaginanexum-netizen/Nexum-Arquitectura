@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { Container } from "@/components/Container";
 import { Logo } from "@/components/Logo";
-import { footer, navLinks } from "@/lib/content";
+import { footer, instagram, navLinks, portfolio } from "@/lib/content";
 
 const socials = [
-  { label: "Instagram", href: "#" },
-  { label: "LinkedIn", href: "#" },
+  { label: "Instagram", href: instagram.href, external: true },
+  { label: "Portafolio (PDF)", href: portfolio.href, external: true },
+  { label: "LinkedIn", href: "#", external: false },
 ];
 
 const legal = [
@@ -49,12 +50,23 @@ export function Footer() {
           <ul className="space-y-3">
             {socials.map((social) => (
               <li key={social.label}>
-                <Link
-                  href={social.href}
-                  className="font-body text-sm text-nexum-white/85 transition-colors hover:text-nexum-gold"
-                >
-                  {social.label}
-                </Link>
+                {social.external ? (
+                  <a
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-body text-sm text-nexum-white/85 transition-colors hover:text-nexum-gold"
+                  >
+                    {social.label}
+                  </a>
+                ) : (
+                  <Link
+                    href={social.href}
+                    className="font-body text-sm text-nexum-white/85 transition-colors hover:text-nexum-gold"
+                  >
+                    {social.label}
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
