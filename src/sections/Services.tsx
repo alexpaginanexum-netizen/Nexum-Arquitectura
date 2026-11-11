@@ -1,107 +1,85 @@
-"use client";
-
-import { useRef, useState } from "react";
+import type { ReactNode } from "react";
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/SectionLabel";
-import { registerGsap, ScrollTrigger } from "@/animations/gsap";
-import { useIsomorphicLayoutEffect } from "@/hooks/useIsomorphicLayoutEffect";
-import { services } from "@/lib/content";
-import { cn } from "@/lib/utils";
+import { services, type ServiceIcon } from "@/lib/content";
+
+/** Íconos lineales sencillos, inspirados en los de la tarjeta de presentación. */
+const iconPaths: Record<ServiceIcon, ReactNode> = {
+  house: (
+    <>
+      <path d="M4 11.5 12 5l8 6.5" />
+      <path d="M6 10v9h12v-9" />
+      <path d="M10 19v-5h4v5" />
+    </>
+  ),
+  crane: (
+    <>
+      <path d="M8 21V4" />
+      <path d="M11 21V4" />
+      <path d="M8 4h3" />
+      <path d="M8 8l3 3M11 8l-3 3M8 14l3 3M11 14l-3 3" />
+      <path d="M4 6h17" />
+      <path d="M18 6v4" />
+      <path d="M6 21h7" />
+    </>
+  ),
+  plans: (
+    <>
+      <path d="M6 6h13v12H6" />
+      <path d="M6 6a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2" />
+      <path d="M6 6a2 2 0 0 1 2 2v10" />
+      <path d="M11 10h5v5" />
+    </>
+  ),
+  pencil: (
+    <>
+      <path d="M15.5 4.5 19.5 8.5 9 19H5v-4z" />
+      <path d="M13 7l4 4" />
+    </>
+  ),
+  layers: (
+    <>
+      <path d="M12 4 3 8.5l9 4.5 9-4.5z" />
+      <path d="m3 12.5 9 4.5 9-4.5" />
+      <path d="m3 16.5 9 4.5 9-4.5" />
+    </>
+  ),
+};
 
 export function Services() {
-  const [active, setActive] = useState(0);
-  const listRef = useRef<HTMLDivElement>(null);
-
-  useIsomorphicLayoutEffect(() => {
-    if (!listRef.current) return;
-    registerGsap();
-
-    const rows = listRef.current.querySelectorAll<HTMLElement>("[data-service-row]");
-    const triggers: ScrollTrigger[] = [];
-
-    const mm = window.matchMedia("(min-width: 1024px)");
-    if (mm.matches) {
-      rows.forEach((row, i) => {
-        triggers.push(
-          ScrollTrigger.create({
-            trigger: row,
-            start: "top center",
-            end: "bottom center",
-            onEnter: () => setActive(i),
-            onEnterBack: () => setActive(i),
-          }),
-        );
-      });
-    }
-
-    return () => triggers.forEach((t) => t.kill());
-  }, []);
-
   return (
-    <section id="servicios" className="bg-nexum-white py-28 md:py-36">
+    <section id="servicios" className="bg-nexum-ivory py-16 md:py-20">
       <Container>
         <Reveal>
-          <SectionLabel index="—" label="Servicios" className="mb-6" />
+          <SectionLabel index="—" label="Servicios" className="mb-10" />
         </Reveal>
-        <Reveal delay={0.05}>
-          <h2 className="max-w-2xl font-display text-4xl leading-tight text-nexum-black sm:text-5xl">
-            Una firma integral, del concepto a la obra construida.
-          </h2>
-        </Reveal>
-      </Container>
 
-      <Container className="mt-16 grid grid-cols-1 gap-4 lg:mt-24 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-16">
-        <div className="hidden lg:block">
-          <div className="sticky top-[calc(var(--nav-height)+2rem)]">
-            <span className="block font-display text-[7rem] leading-none text-nexum-black/10">
-              {services[active].index}
-            </span>
-            <h3 className="mt-4 font-display text-3xl text-nexum-black">
-              {services[active].title}
-            </h3>
-            <p className="mt-4 max-w-sm font-body text-sm leading-relaxed text-nexum-graphite">
-              {services[active].description}
-            </p>
-            <p className="mt-6 font-body text-sm italic text-nexum-bronze-deep">
-              “{services[active].line}”
-            </p>
-          </div>
-        </div>
-
-        <div ref={listRef}>
+        <ul className="grid grid-cols-1 gap-x-10 sm:grid-cols-2 lg:grid-cols-5">
           {services.map((service, i) => (
-            <div
-              key={service.index}
-              data-service-row
-              onMouseEnter={() => setActive(i)}
-              className={cn(
-                "group border-b border-nexum-black/10 py-8 transition-colors duration-300 lg:border-l-2 lg:py-14 lg:pl-6",
-                active === i ? "lg:border-nexum-gold" : "lg:border-transparent",
-              )}
-            >
-              <Reveal>
-                <div className="flex items-baseline gap-5">
-                  <span className="font-body text-sm text-nexum-bronze-deep">{service.index}</span>
-                  <h3
-                    className={cn(
-                      "font-display text-2xl transition-colors group-hover:text-nexum-bronze-deep sm:text-3xl",
-                      active === i ? "text-nexum-black" : "text-nexum-black lg:text-nexum-graphite",
-                    )}
+            <li key={service.index} className="border-t border-nexum-black/10 py-6 lg:py-8">
+              <Reveal delay={i * 0.05}>
+                <div className="flex items-center gap-4 lg:flex-col lg:items-start">
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="h-9 w-9 shrink-0 text-nexum-bronze-deep"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.25"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    aria-hidden="true"
                   >
+                    {iconPaths[service.icon]}
+                  </svg>
+                  <h3 className="font-body text-sm tracking-nexum uppercase text-nexum-black">
                     {service.title}
                   </h3>
                 </div>
-                <p className="mt-3 pl-10 font-body text-sm leading-relaxed text-nexum-graphite lg:hidden">
-                  {service.description}
-                </p>
-                <p className="mt-2 pl-10 font-body text-sm italic text-nexum-bronze-deep lg:hidden">
-                  “{service.line}”
-                </p>
               </Reveal>
-            </div>
+            </li>
           ))}
-        </div>
+        </ul>
       </Container>
     </section>
   );

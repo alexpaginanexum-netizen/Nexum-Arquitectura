@@ -6,7 +6,7 @@ import { portfolio } from "@/lib/content";
 
 export function Projects() {
   return (
-    <section id="proyectos" className="bg-nexum-white py-24 md:py-32">
+    <section id="proyectos" className="bg-nexum-white py-16 md:py-20">
       <Container>
         <div className="max-w-2xl">
           <Reveal>

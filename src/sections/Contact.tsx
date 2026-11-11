@@ -6,7 +6,7 @@ import { contact, portfolio } from "@/lib/content";
 
 export function Contact() {
   return (
-    <section id="contacto" className="bg-nexum-black py-28 text-nexum-white md:py-36">
+    <section id="contacto" className="bg-nexum-black py-16 text-nexum-white md:py-20">
       <Container>
         <div className="max-w-3xl">
           <Reveal>

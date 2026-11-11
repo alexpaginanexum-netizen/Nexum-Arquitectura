@@ -16,9 +16,8 @@ export const brand = {
 };
 
 export const navLinks = [
-  { label: "Proyectos", href: "#proyectos" },
   { label: "Servicios", href: "#servicios" },
-  { label: "Nosotros", href: "#nexum" },
+  { label: "Proyectos", href: "#proyectos" },
   { label: "Alianza", href: "#alianza" },
   { label: "Contacto", href: "#contacto" },
 ];
@@ -36,7 +35,7 @@ export const hero = {
 export const nexumSection = {
   eyebrow: "El nombre",
   headline: "NEXUM significa conexión.",
-  body: "Nuestro nombre proviene del latín y representa unión, conexión y vínculo sólido. Esa misma idea define nuestra forma de entender la arquitectura: conectar necesidades, diseño, tecnología, materiales y personas para transformar una idea en un espacio construido.",
+  body: "Del latín: unión, vínculo sólido. Así entendemos la arquitectura: conectar ideas, espacios y personas.",
   nodes: ["IDEA", "DISEÑO", "ESPACIO", "MATERIAL", "PERSONA", "CONEXIÓN"],
 };
 
@@ -50,47 +49,15 @@ export const journeySteps = [
   "NEXUM",
 ];
 
-export const services = [
-  {
-    index: "01",
-    title: "Arquitectura residencial",
-    description:
-      "Casas, residencias, remodelaciones, ampliaciones y proyectos habitacionales.",
-    line: "Espacios diseñados alrededor de quienes los habitan.",
-  },
-  {
-    index: "02",
-    title: "Desarrollo habitacional",
-    description:
-      "Edificios de departamentos, conjuntos habitacionales y desarrollos residenciales.",
-    line: "Diseñamos espacios que conectan arquitectura, comunidad y ciudad.",
-  },
-  {
-    index: "03",
-    title: "Diseño de interiores",
-    description:
-      "Diseño residencial y comercial, materiales, mobiliario e iluminación.",
-    line: "El espacio continúa después de la arquitectura.",
-  },
-  {
-    index: "04",
-    title: "Visualización arquitectónica",
-    description:
-      "Renders fotorrealistas, modelado 3D, recorridos virtuales, interiores y exteriores.",
-    line: "Visualizamos el proyecto antes de construirlo.",
-  },
-  {
-    index: "05",
-    title: "Proyecto ejecutivo",
-    description: "Planos, documentación, detalles, coordinación y especificaciones.",
-    line: "Convertimos una idea en información capaz de construirse.",
-  },
-  {
-    index: "06",
-    title: "Construcción",
-    description: "Desarrollo y ejecución de proyectos.",
-    line: "Del concepto al espacio construido.",
-  },
+export type ServiceIcon = "house" | "crane" | "plans" | "pencil" | "layers";
+
+/** Servicios tal como aparecen en la tarjeta de presentación de NEXUM. */
+export const services: { index: string; title: string; icon: ServiceIcon }[] = [
+  { index: "01", title: "Remodelaciones", icon: "house" },
+  { index: "02", title: "Construcciones", icon: "crane" },
+  { index: "03", title: "Levantamiento de planos", icon: "plans" },
+  { index: "04", title: "Anteproyectos", icon: "pencil" },
+  { index: "05", title: "Proyectos ejecutivos", icon: "layers" },
 ];
 
 export const process = [
@@ -245,7 +212,7 @@ export const alliance = {
   eyebrow: "Alianza estratégica",
   visual: "NEXUM × GARCYM",
   headline: "Diseño conectado con experiencia y ejecución.",
-  body: "NEXUM Arquitectura mantiene una alianza estratégica con GARCYM, empresa con presencia en Chimalhuacán, Estado de México. Esta colaboración fortalece nuestra capacidad para conectar diseño, desarrollo y ejecución dentro de los proyectos.",
+  body: "Alianza estratégica con GARCYM (Chimalhuacán, Estado de México) para llevar cada proyecto del diseño a la obra.",
 };
 
 export interface TeamContact {
