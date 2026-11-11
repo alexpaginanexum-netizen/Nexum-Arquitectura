@@ -13,6 +13,7 @@ export const brand = {
   conceptSecondary:
     "Conectamos ideas, espacios y personas para construir algo que permanezca.",
   tagline: "Todo comienza con una conexión.",
+  motto: "IDEAS | ESPACIOS | PERSONAS",
 };
 
 export const navLinks = [

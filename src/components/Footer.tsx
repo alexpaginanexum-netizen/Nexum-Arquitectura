@@ -21,7 +21,7 @@ export function Footer() {
     <footer className="bg-nexum-black text-nexum-white">
       <Container className="grid grid-cols-1 gap-14 py-20 md:grid-cols-4 md:gap-8">
         <div className="md:col-span-2">
-          <Logo width={72} height={56} className="mb-6" />
+          <Logo className="mb-6 h-14 rounded bg-white p-1.5" />
           <p className="max-w-xs font-body text-sm text-nexum-concrete">{footer.note}</p>
         </div>
 

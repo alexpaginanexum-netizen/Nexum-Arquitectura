@@ -5,20 +5,12 @@ import { useEffect, useRef, useState } from "react";
 import { Container } from "@/components/Container";
 import { Logo } from "@/components/Logo";
 import { gsap, registerGsap } from "@/animations/gsap";
-import { navLinks } from "@/lib/content";
+import { brand, navLinks } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
 
   useEffect(() => {
     document.body.style.overflow = open ? "hidden" : "";
@@ -43,32 +35,31 @@ export function Navbar() {
   }, [open]);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-50 transition-colors duration-500",
-        scrolled || open
-          ? "bg-nexum-white/90 backdrop-blur-md border-b border-nexum-black/10"
-          : "bg-transparent",
-      )}
-    >
+    // Fondo blanco sólido (igual al fondo del logo), sin transparencia ni blur.
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-nexum-black/[0.06] bg-white">
       <Container
         as="nav"
-        className="flex h-[var(--nav-height)] items-center justify-between"
+        className="flex h-[var(--nav-height)] items-center justify-between gap-4"
         aria-label="Navegación principal"
       >
-        <Link href="#top" className="flex items-center gap-3" aria-label="Ir al inicio, NEXUM Arquitectura">
-          <Logo width={44} height={34} priority />
-          <span className="hidden font-body text-sm tracking-nexum text-nexum-black sm:inline">
-            NEXUM
+        <Link href="#top" className="flex min-w-0 items-center gap-3" aria-label="Ir al inicio, NEXUM Arquitectura">
+          <Logo className="h-12 md:h-16" sizes="(min-width: 768px) 90px, 68px" priority />
+          <span className="flex min-w-0 flex-col leading-none">
+            <span className="font-body text-sm font-semibold tracking-nexum text-nexum-black">
+              NEXUM
+            </span>
+            <span className="mt-1.5 hidden whitespace-nowrap font-body text-[0.6rem] tracking-[0.18em] uppercase text-nexum-graphite min-[400px]:block md:text-[0.65rem]">
+              {brand.motto}
+            </span>
           </span>
         </Link>
 
-        <ul className="hidden items-center gap-10 md:flex">
+        <ul className="hidden items-center gap-8 md:flex lg:gap-10">
           {navLinks.map((link) => (
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="font-body text-xs tracking-nexum uppercase text-nexum-black/80 transition-colors hover:text-nexum-bronze-deep"
+                className="font-body text-xs tracking-nexum uppercase text-nexum-black transition-colors hover:text-nexum-bronze-deep"
               >
                 {link.label}
               </Link>
@@ -91,7 +82,7 @@ export function Navbar() {
         id="mobile-menu"
         ref={menuRef}
         className={cn(
-          "fixed inset-0 top-[var(--nav-height)] bg-nexum-white",
+          "fixed inset-0 top-[var(--nav-height)] bg-white",
           open ? "pointer-events-auto" : "pointer-events-none invisible",
         )}
         style={{ clipPath: open ? undefined : "inset(0 0 100% 0)" }}
