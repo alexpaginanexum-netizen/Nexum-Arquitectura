@@ -1,7 +1,7 @@
 import { Container } from "@/components/Container";
 import { Reveal } from "@/components/Reveal";
 import { SectionLabel } from "@/components/SectionLabel";
-import { nexumSection } from "@/lib/content";
+import { brand, nexumSection } from "@/lib/content";
 
 export function NexumIntro() {
   return (
@@ -19,6 +19,12 @@ export function NexumIntro() {
           <Reveal delay={0.1}>
             <p className="mt-6 max-w-xl font-body text-base leading-relaxed text-nexum-graphite">
               {nexumSection.body}
+            </p>
+          </Reveal>
+          <Reveal delay={0.15}>
+            {/* Lema de la tarjeta, enmarcado con las líneas punteadas doradas de la misma. */}
+            <p className="mt-10 inline-block border-y-2 border-dotted border-nexum-gold py-3 font-display text-xl italic text-nexum-black sm:text-2xl">
+              {brand.slogan}
             </p>
           </Reveal>
         </div>

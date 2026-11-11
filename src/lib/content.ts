@@ -14,6 +14,8 @@ export const brand = {
     "Conectamos ideas, espacios y personas para construir algo que permanezca.",
   tagline: "Todo comienza con una conexión.",
   motto: "IDEAS | ESPACIOS | PERSONAS",
+  /** Lema de la tarjeta de presentación. */
+  slogan: "Llevamos tu diseño y te acompañamos en tu obra",
 };
 
 export const navLinks = [
