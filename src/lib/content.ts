@@ -285,29 +285,55 @@ export const portfolio = {
   downloadName: "Catalogo-NEXUM-Arquitectura.pdf",
 };
 
+export const email = {
+  address: "nexumarquitectura@gmail.com",
+  href: "mailto:nexumarquitectura@gmail.com",
+  ariaLabel: "Enviar correo a NEXUM Arquitectura: nexumarquitectura@gmail.com",
+};
+
+export interface ContactLink {
+  label: string;
+  href: string;
+  ariaLabel?: string;
+  external?: boolean;
+}
+
 export interface ContactChannel {
   label: string;
-  value?: string;
-  href?: string;
-  links?: { label: string; href: string }[];
+  links: ContactLink[];
 }
 
 export const contact = {
   kicker: "Todo comienza con una conexión.",
   headline: "Hablemos de tu próximo proyecto.",
   cta: "Iniciar proyecto",
+  // Teléfono y Ubicación se omiten a propósito: el teléfono ya está en
+  // WhatsApp y la ubicación sigue pendiente de confirmar.
   channels: [
     {
       label: "WhatsApp",
       links: teamContacts.map((member) => ({
-        label: `${member.title} ${member.name} · ${member.display}`,
+        label: `${member.name} · ${member.display}`,
         href: whatsappHrefFor(member),
+        ariaLabel: `WhatsApp de ${member.title} ${member.name}, ${member.display}`,
+        external: true,
       })),
     },
-    { label: "Correo", value: "Pendiente" },
-    { label: "Teléfono", value: "Pendiente" },
-    { label: "Instagram", value: instagram.handle, href: instagram.href },
-    { label: "Ubicación", value: "Pendiente" },
+    {
+      label: "Correo",
+      links: [{ label: email.address, href: email.href, ariaLabel: email.ariaLabel }],
+    },
+    {
+      label: "Instagram",
+      links: [
+        {
+          label: instagram.handle,
+          href: instagram.href,
+          ariaLabel: "Instagram de NEXUM Arquitectura",
+          external: true,
+        },
+      ],
+    },
   ] as ContactChannel[],
 };
 
