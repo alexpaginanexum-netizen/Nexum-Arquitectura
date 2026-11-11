@@ -14,18 +14,21 @@ export function Projects() {
           </Reveal>
           <Reveal delay={0.05}>
             <h2 className="font-display text-4xl leading-tight text-nexum-black sm:text-5xl">
-              Conoce nuestro trabajo.
+              Conoce nuestro trabajo
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
-            <p className="mt-6 font-body text-sm leading-relaxed text-nexum-graphite">
-              Revisa nuestro portafolio arquitectónico completo.
+            <p className="mt-4 font-body text-base leading-relaxed text-nexum-graphite">
+              Revisa nuestro portafolio arquitectónico o descárgalo en PDF.
             </p>
           </Reveal>
           <Reveal delay={0.14}>
-            <div className="mt-8">
-              <Button href={portfolio.href} variant="secondary">
-                {portfolio.label}
+            <div className="mt-8 flex flex-wrap gap-4">
+              <Button href={portfolio.href} variant="primary">
+                {portfolio.viewLabel}
+              </Button>
+              <Button href={portfolio.href} download={portfolio.downloadName} variant="secondary">
+                {portfolio.downloadLabel}
               </Button>
             </div>
           </Reveal>

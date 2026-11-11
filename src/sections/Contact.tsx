@@ -20,8 +20,8 @@ export function Contact() {
           <Reveal delay={0.12}>
             <div className="mt-12 flex flex-wrap items-start gap-4">
               <WhatsAppPicker variant="cta">{contact.cta}</WhatsAppPicker>
-              <Button href={portfolio.href} variant="outline-light">
-                {portfolio.label}
+              <Button href={portfolio.href} download={portfolio.downloadName} variant="outline-light">
+                {portfolio.downloadLabel}
               </Button>
             </div>
           </Reveal>

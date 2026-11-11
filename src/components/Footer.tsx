@@ -5,7 +5,7 @@ import { footer, instagram, navLinks, portfolio } from "@/lib/content";
 
 const socials = [
   { label: "Instagram", href: instagram.href, external: true },
-  { label: "Portafolio (PDF)", href: portfolio.href, external: true },
+  { label: portfolio.downloadLabel, href: portfolio.href, external: true },
   { label: "LinkedIn", href: "#", external: false },
 ];
 

@@ -271,10 +271,18 @@ export const instagram = {
   href: "https://www.instagram.com/nexum.arquitectos",
 };
 
-/** Portafolio arquitectónico en PDF (archivo en public/). */
+/**
+ * Portafolio / catálogo arquitectónico en PDF.
+ * Para actualizarlo basta con sustituir el archivo public/portafolio-nexum.pdf
+ * conservando el mismo nombre; no hay que tocar código. Si cambia el nombre
+ * del archivo, actualiza solo `href` aquí.
+ */
 export const portfolio = {
-  label: "Ver portafolio (PDF)",
   href: "/portafolio-nexum.pdf",
+  viewLabel: "Ver portafolio",
+  downloadLabel: "Descargar catálogo (PDF)",
+  /** Nombre con el que se guarda el archivo al descargarlo. */
+  downloadName: "Catalogo-NEXUM-Arquitectura.pdf",
 };
 
 export interface ContactChannel {

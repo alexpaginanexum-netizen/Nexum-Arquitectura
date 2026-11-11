@@ -7,9 +7,11 @@ interface ButtonProps {
   children: ReactNode;
   variant?: "primary" | "secondary" | "ghost" | "light" | "outline-light";
   className?: string;
+  /** Si se indica, el enlace descarga el archivo con este nombre en vez de abrirlo. */
+  download?: string;
 }
 
-export function Button({ href, children, variant = "primary", className }: ButtonProps) {
+export function Button({ href, children, variant = "primary", className, download }: ButtonProps) {
   const base =
     "group inline-flex items-center gap-3 font-body text-xs tracking-nexum uppercase transition-colors duration-300 focus-visible:outline-2";
 
@@ -34,10 +36,18 @@ export function Button({ href, children, variant = "primary", className }: Butto
         aria-hidden
         className="inline-block transition-transform duration-300 group-hover:translate-x-1"
       >
-        →
+        {download ? "↓" : "→"}
       </span>
     </>
   );
+
+  if (download) {
+    return (
+      <a href={href} download={download} className={cn(base, styles[variant], className)}>
+        {content}
+      </a>
+    );
+  }
 
   if (isExternal) {
     return (
